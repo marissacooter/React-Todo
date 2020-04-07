@@ -12,12 +12,12 @@ class App extends React.Component {
     this.state = {
       todos: [
         {
-          task: "Organize Garage",
+          task: "Write Code",
           id: uuidv4(),
           completed: false,
         },
         {
-          task: "Bake Cookies",
+          task: "Style Code",
           id: uuidv4(),
           completed: false,
         },
@@ -49,6 +49,19 @@ class App extends React.Component {
       }),
     });
   };
+
+  toggleClear = id => {
+    this.setState({
+      todos: this.state.todos.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+          
+          }
+        }
+      })
+    })
+  }
 
   render() {
     return (
