@@ -24,23 +24,40 @@ class App extends React.Component {
       ],
     };
   }
-  addToDo = task => {
+  addToDo = (task) => {
     const newItem = {
       task: task,
       id: uuidv4(),
       completed: false,
-    }
+    };
     this.setState({
       //.concat adds and returns new array plus old items
-      todos: this.state.todos.concat(newItem)
-    })
+      todos: this.state.todos.concat(newItem),
+    });
+  };
+
+  toggleComplete = id => {
+    this.setState({
+      todos: this.state.todos.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            completed: !item.completed,
+          };
+        }
+        return item;
+      }),
+    });
   };
 
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList todos={this.state.todos} />
+        <TodoList
+          todos={this.state.todos}
+          toggleComplete={this.toggleComplete}
+        />
         <TodoForm addToDo={this.addToDo} />
       </div>
     );
